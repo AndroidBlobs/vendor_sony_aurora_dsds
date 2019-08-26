@@ -1,0 +1,19 @@
+# Copyright (c) 2018 Sony Mobile Communications Inc.
+#
+# product specific configuration
+#
+
+# CTA
+service cta /system/vendor/bin/cta_server
+    user root
+    group root system readproc
+    class main
+
+on property:persist.service.cta.enable=0
+    stop cta
+
+on property:persist.service.cta.enable=1
+    start cta
+
+on post-fs-data
+    mkdir /data/vendor/cta 0700 root root
